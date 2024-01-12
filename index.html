@@ -8,6 +8,7 @@
     <title>Drag and Drop Files</title>
 
     <style>
+
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap');
 
         * {
@@ -40,7 +41,7 @@
             cursor: pointer;
         }
 
-        #drop-area>p{
+        #drop-area>p {
             text-align: center;
         }
 
@@ -65,9 +66,11 @@
 
 <body>
 
-    <div id="drop-area" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
-        <p>Drag & Drop files here</p>
-    </div>
+    <label for="files" id="drop-area" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
+        <p>Select files or Drop files here</p>
+    </label>
+
+    <input type="file" multiple id="files" hidden onchange="showFiles(event)" />
 
     <div class="result"></div>
 
@@ -95,6 +98,20 @@
 
             }
 
+        }
+
+        function showFiles(event) {
+
+            const files = event.target.files
+            for (const file of files) {
+
+                // console.log('File:', file);
+                let p = document.createElement("p")
+                p.innerText = file.name
+                document.querySelector(".result").appendChild(p)
+
+            }
+            
         }
     </script>
 
