@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Files</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap');
+
+        * {
+            font-family: "Poppins", sans-serif;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            color: #353535;
+            font-weight: 700;
+        }
+
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2em;
+            padding: 2em;
+        }
+
+        #drop-area {
+            width: 80%;
+            padding: 10em 2em;
+            border: 2px dashed #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        #drop-area>p{
+            text-align: center;
+        }
+
+        .result {
+            width: 80%;
+            height: fit-content;
+            display: flex;
+            gap: 1em;
+            padding: 1em;
+            flex-wrap: wrap;
+        }
+
+        .result>p {
+            padding: 0.5em;
+            border: 1px solid #353535;
+            border-radius: 20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="drop-area" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
+        <p>Drag & Drop files here</p>
+    </div>
+
+    <div class="result"></div>
+
+    <script>
+
+        function dragOverHandler(event) {
+
+            event.preventDefault();
+            event.target.style.border = "2px dashed #333";
+
+        }
+
+        function dropHandler(event) {
+
+            event.preventDefault();
+            event.target.style.border = "2px dashed #ccc";
+            const files = event.dataTransfer.files;
+
+            for (const file of files) {
+
+                // console.log('File:', file);
+                let p = document.createElement("p")
+                p.innerText = file.name
+                document.querySelector(".result").appendChild(p)
+
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>
